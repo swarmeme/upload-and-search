@@ -90,8 +90,4 @@ Both text chunks and the user query use the CPU `all-MiniLM-L6-v2` model, produc
 
 Local disk and one SQLite database are intentionally the boundary of this exercise. I would move bytes to object storage (for example S3/GCS multipart uploads), place durable processing jobs on a message queue, and horizontally scale stateless workers. Search would move to a distributed vector system such as Qdrant or Milvus, or FAISS with IVF+PQ compression where operational ownership is acceptable; metadata would use a service-grade relational database. Upload status and idempotency records would remain durable and independently scalable.
 
-## AI tools used
 
-Codex was used to help implement this take-home service.
-
-Personal review/changes: _TODO: describe the implementation details you reviewed, tested, or changed._
