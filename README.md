@@ -1,27 +1,6 @@
-# Large File Semantic Search
+# Large File Processing and Semantic Search
 
 A FastAPI take-home service that accepts resumable, positional uploads up to 10 GB and semantically searches a completed UTF-8 text file. It is intentionally local-first: metadata and vectors live in SQLite, and source bytes stay on the local disk.
-
-## Project layout
-
-```
-large-file-semantic-search/
-├── app/
-│   ├── config.py       # Resource limits, paths, model/chunking constants
-│   ├── db.py           # SQLite/SQLAlchemy setup and sqlite-vec registration
-│   ├── models.py       # Persistent files, upload ranges, and text chunks
-│   ├── schemas.py      # Validated request/response contracts
-│   ├── uploads.py      # Upload session creation, durable positional chunk writes
-│   ├── processing.py   # Bounded background stream/chunk/embed/checkpoint worker
-│   ├── search.py       # Query embedding and sqlite-vec nearest-neighbour lookup
-│   └── main.py         # FastAPI wiring and restart recovery
-├── data/               # Created at runtime: SQLite database and UUID-named uploads
-├── model_cache/        # Created at runtime: downloaded sentence-transformers model
-├── requirements.txt
-└── .gitignore
-```
-
-`schemas.py` is a deliberate small addition to the suggested skeleton: keeping HTTP validation separate from SQLAlchemy persistence models makes both modules simpler to read. Upload files are named from a server-generated UUID, never from the user-supplied filename.
 
 ## Run locally
 
